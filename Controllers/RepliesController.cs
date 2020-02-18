@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
+namespace WebApi_Intro.Controllers
+{
+    [ApiController]
+    [Route("replies")]
+    public class RepliesController : ControllerBase
+    {
+        private static List<IdReplies> Reply = new List<IdReplies>()
+        {
+            new IdReplies(){Id=1, Content="qwerty", MemberId= 2, TopicId= 2},
+            new IdReplies(){Id=2, Content="qwerty", MemberId= 2, TopicId= 2},
+            new IdReplies(){Id=3, Content="qwerty", MemberId= 2, TopicId= 2},
+            new IdReplies(){Id=4, Content="qwerty", MemberId= 2, TopicId= 2},
+            new IdReplies(){Id=5, Content="qwerty", MemberId= 2, TopicId= 2}
+        };
+
+        private readonly ILogger<RepliesController> _logger;
+
+        public RepliesController(ILogger<RepliesController> logger)
+        {
+            _logger = logger;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(new { status="success", message="success get Data", data = Reply});
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            return Ok(Reply.Find( e => e.Id == id));
+        }
+
+        [HttpPost]
+        public IActionResult RepliesAdd(IdReplies rip)
+        {
+            var addRep = new IdReplies(){Id=rip.Id, Content = rip.Content, MemberId = rip.MemberId, TopicId = rip.TopicId};
+            Reply.Add(addRep);
+            return Ok(new { status = "success", message = "success add Data", data = Reply});
+        }
+    }
+}
