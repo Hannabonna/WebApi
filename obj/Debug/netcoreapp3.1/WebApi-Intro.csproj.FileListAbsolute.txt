@@ -16,3 +16,6 @@
 /Users/gigaming/WebApi-Intro/obj/Debug/netcoreapp3.1/WebApi-Intro.RazorTargetAssemblyInfo.cache
 /Users/gigaming/WebApi-Intro/obj/Debug/netcoreapp3.1/WebApi-Intro.dll
 /Users/gigaming/WebApi-Intro/obj/Debug/netcoreapp3.1/WebApi-Intro.pdb
+/Users/gigaming/WebApi-Intro/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.JsonPatch.dll
+/Users/gigaming/WebApi-Intro/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
+/Users/gigaming/WebApi-Intro/obj/Debug/netcoreapp3.1/WebApi-Intro.csproj.CopyComplete

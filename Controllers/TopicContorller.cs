@@ -33,18 +33,26 @@ namespace WebApi_Intro.Controllers
             return Ok(new { status="success", message="success get Data", data = Topic});
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            return Ok(Topic.Find( e => e.Id == id));
-        }
-
         [HttpPost]
         public IActionResult TopicAdd(IdTopic top)
         {
             var addTop = new IdTopic(){Id=top.Id, Content = top.Content, Title = top.Title, MemberId = top.MemberId};
             Topic.Add(addTop);
             return Ok(new { status = "success", message = "success add Data", data = Topic});
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            return Ok(Topic.Find( e => e.Id == id));
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteTopic(int id)
+        {
+            var del = Topic.Find( e => e.Id == id);
+            Topic.Remove(del);
+            return Ok(new { status = "deleted", message = "success delete some data", data = Topic});
         }
     }
 }

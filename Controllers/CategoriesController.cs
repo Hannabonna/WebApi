@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -33,18 +34,39 @@ namespace WebApi_Intro.Controllers
             return Ok(new { status="success", message="success get Data", data = Categori});
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            return Ok(Categori.Find( e => e.Id == id));
-        }
-
         [HttpPost]
         public IActionResult CategoriesAdd(Primary prim)
         {
             var addCate = new Primary(){Id=prim.Id, Name = prim.Name, Description = prim.Description};
             Categori.Add(addCate);
             return Ok(new { status = "success", message = "success add Data", data = Categori});
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            return Ok(Categori.Find( e => e.Id == id));
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCategories(int id)
+        {
+            var del = Categori.Find( e => e.Id == id);
+            Categori.Remove(del);
+            return Ok(new { status = "deleted", message = "success delete some data", data = Categori});
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult PatchCategories(int id, [FromBody] JsonPatchDocument<Primary> patch)
+        {
+            if (patch == null)
+            {
+                return BadRequest();
+            }
+            
+            var categoriFromDb = new Primary { Id= 2, Name = "lalala", Description = "lalalaland" };
+            patch.ApplyTo(categoriFromDb);
+            return Ok(categoriFromDb);
         }
     }
 }

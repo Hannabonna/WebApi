@@ -32,13 +32,7 @@ namespace WebApi_Intro.Controllers
         {
             return Ok(new { status="success", message="success get Data", data = Members});
         }
-
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            return Ok(Members.Find( e => e.Id == id));
-        }
-
+        
         [HttpPost]
         public IActionResult MemberAdd(IdMember mem)
         {
@@ -46,5 +40,20 @@ namespace WebApi_Intro.Controllers
             Members.Add(addMember);
             return Ok(new { status = "success", message = "success add Data", data = Members});
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            return Ok(Members.Find( e => e.Id == id));
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteMember(int id)
+        {
+            var del = Members.Find( e => e.Id == id);
+            Members.Remove(del);
+            return Ok(new { status = "deleted", message = "success delete some data", data = Members});
+        }
+        
     }
 }
