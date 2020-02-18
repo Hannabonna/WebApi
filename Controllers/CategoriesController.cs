@@ -57,16 +57,10 @@ namespace WebApi_Intro.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IActionResult PatchCategories(int id, [FromBody] JsonPatchDocument<Primary> patch)
+        public IActionResult PatchCategories(int id, [FromBody] JsonPatchDocument<Primary> patchCate)
         {
-            if (patch == null)
-            {
-                return BadRequest();
-            }
-            
-            var categoriFromDb = new Primary { Id= 2, Name = "lalala", Description = "lalalaland" };
-            patch.ApplyTo(categoriFromDb);
-            return Ok(categoriFromDb);
+            patchCate.ApplyTo(Categori.Find(e => e.Id == id));
+            return Ok( new { status = "updated", message = "success update data", data = Categori.Find(e => e.Id == id) });
         }
     }
 }

@@ -19,3 +19,5 @@
 /Users/gigaming/WebApi-Intro/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.JsonPatch.dll
 /Users/gigaming/WebApi-Intro/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
 /Users/gigaming/WebApi-Intro/obj/Debug/netcoreapp3.1/WebApi-Intro.csproj.CopyComplete
+/Users/gigaming/WebApi-Intro/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/gigaming/WebApi-Intro/bin/Debug/netcoreapp3.1/Newtonsoft.Json.Bson.dll

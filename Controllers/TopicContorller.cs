@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -53,6 +54,13 @@ namespace WebApi_Intro.Controllers
             var del = Topic.Find( e => e.Id == id);
             Topic.Remove(del);
             return Ok(new { status = "deleted", message = "success delete some data", data = Topic});
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult PatchTopic(int id, [FromBody] JsonPatchDocument<IdTopic> patchTop)
+        {
+            patchTop.ApplyTo(Topic.Find(e => e.Id == id));
+            return Ok( new { status = "updated", message = "success update data", data = Topic.Find(e => e.Id == id) });
         }
     }
 }
